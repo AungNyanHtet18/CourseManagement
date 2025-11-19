@@ -1,0 +1,17 @@
+name: courses
+
+services:
+  db:
+    image: postgres:17.6-alpine
+    container_name: courses-db
+    environment:
+      - POSTGRES_DB=coursedb
+    env_file:
+      - .env.postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+   dbdata:
