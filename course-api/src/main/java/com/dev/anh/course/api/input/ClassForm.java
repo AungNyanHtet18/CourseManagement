@@ -1,9 +1,11 @@
 package com.dev.anh.course.api.input;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import com.dev.anh.course.api.output.Schedule;
 import com.dev.anh.course.model.consts.ClassType;
+import com.dev.anh.course.model.entity.Classes;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
@@ -20,6 +22,14 @@ public record ClassForm(
 	 @NotEmpty(message = "Please enter schedule")
 	 List<@Valid Schedule> shedules) {
 
-	
+	public Classes entity() {
+		var entity = new Classes();
+		entity.setStartDate(starDate);
+		entity.setType(classType);
+		entity.setRemark(remark);
+		entity.setCreatedAt(LocalDateTime.now());
+		return entity;
+	}
+
 	
 }

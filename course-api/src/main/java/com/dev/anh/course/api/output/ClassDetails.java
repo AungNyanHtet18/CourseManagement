@@ -20,4 +20,8 @@ public record ClassDetails(
 		LocalDateTime createdAt,
 		LocalDateTime updatedAt) {
 	
+	
+	
+	
+	
 }
