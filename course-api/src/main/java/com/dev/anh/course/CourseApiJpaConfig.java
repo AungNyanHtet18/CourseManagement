@@ -9,5 +9,4 @@ import com.dev.anh.course.model.BaseRepositoryImpl;
 @EnableJpaRepositories(repositoryBaseClass = BaseRepositoryImpl.class)
 public class CourseApiJpaConfig {
 		
-	
 }

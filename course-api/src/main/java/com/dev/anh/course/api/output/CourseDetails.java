@@ -28,10 +28,5 @@ public record CourseDetails(
 					entity.isDeleted() ,
 					entity.getCreatedAt(),
 					entity.getUpdatedAt());
-	}
-	
-	
-	
-	
-	
+	}	
 }
