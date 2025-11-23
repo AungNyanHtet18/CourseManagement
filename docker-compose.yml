@@ -8,10 +8,32 @@ services:
       - POSTGRES_DB=coursedb
     env_file:
       - .env.postgres
-    ports:
-      - 5432:5432
     volumes:
       - dbdata:/var/lib/postgresql/data
+    networks:
+      - course-net
+    ports:
+      - 5432:5432
+    
+
+  backend:
+    build: 
+      context: ./course-api
+      dockerfile: Dockerfile
+    container_name: course-api
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    env_file:
+      - .env.postgres
+    networks:
+      - course-net
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+
+networks:
+  course-net:
 
 volumes:
    dbdata:
