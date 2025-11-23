@@ -15,21 +15,22 @@ public record ClassForm(
 	 @NotNull(message = "Please select course.")
 	 Integer courseId,
 	 @NotNull(message = "Please enter start date.")
-	 LocalDate starDate,
+	 LocalDate startDate,
 	 @NotNull(message = "Please enter class type.")
 	 ClassType classType,
+	 @NotNull(message = "Please enter duration in months.")
+	 Integer months,
 	 String remark,
-	 @NotEmpty(message = "Please enter schedule")
-	 List<@Valid Schedule> shedules) {
+	 @NotEmpty(message = "Please enter schedule.")
+	 List<@Valid Schedule> schedules) {
 
 	public Classes entity() {
 		var entity = new Classes();
-		entity.setStartDate(starDate);
+		entity.setStartDate(startDate);
 		entity.setType(classType);
+		entity.setMonths(months);
 		entity.setRemark(remark);
 		entity.setCreatedAt(LocalDateTime.now());
 		return entity;
 	}
-
-	
 }

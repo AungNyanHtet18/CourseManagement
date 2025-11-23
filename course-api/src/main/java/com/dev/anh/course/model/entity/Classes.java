@@ -33,10 +33,13 @@ public class Classes implements Serializable{
 	@Column(nullable = false)
 	private ClassType type;
 	
+	@Column(nullable = false)
+	private int months;
+	
 	private String remark;
 	
 	@Column(nullable = false)
-	private String shedules;
+	private String schedules;
 	
  	private boolean deleted;
 	private LocalDateTime createdAt;

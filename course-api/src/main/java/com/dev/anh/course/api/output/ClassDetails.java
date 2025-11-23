@@ -16,6 +16,7 @@ public record ClassDetails(
 		String courseName,
 		LocalDate startDate,
 		ClassType classType,
+		int months,
 		String remark,
 		List<Schedule> shedules,
 		boolean deleted,
@@ -30,8 +31,9 @@ public record ClassDetails(
 				entity.getCourse().getName(), 
 				entity.getStartDate(),
 				entity.getType(), 
+				entity.getMonths(),
 				entity.getRemark(), 
-				mapper.apply(entity.getShedules()), 
+				mapper.apply(entity.getSchedules()), 
 				entity.isDeleted(),
 				entity.getCreatedAt(), 
 				entity.getUpdatedAt());

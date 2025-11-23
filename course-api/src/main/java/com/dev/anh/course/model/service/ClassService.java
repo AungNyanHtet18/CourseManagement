@@ -14,6 +14,7 @@ import com.dev.anh.course.api.output.ClassListItem;
 import com.dev.anh.course.api.output.ModificationResult;
 import com.dev.anh.course.api.output.PageResult;
 import com.dev.anh.course.api.output.Schedule;
+import com.dev.anh.course.exceptions.BusinessException;
 import com.dev.anh.course.model.entity.Classes;
 import com.dev.anh.course.model.entity.Classes_;
 import com.dev.anh.course.model.entity.Course;
@@ -84,7 +85,8 @@ public class ClassService {
 	}
 
 	public ClassDetails findById(int id) {
-		return classesRepo.findById(id).map(a -> ClassDetails.from(a, this::covert)).orElseThrow();
+		return classesRepo.findById(id).map(a -> ClassDetails.from(a, this::covert))
+				.orElseThrow(() -> new BusinessException("There is no class  with id %s".formatted(id)));
 	}
 	
 	
@@ -94,17 +96,17 @@ public class ClassService {
 		try {
 			
 			//Find Course
-			var course = courseRepo.findById(form.courseId()).orElseThrow();
+			var course = courseRepo.findById(form.courseId())
+								.orElseThrow(() -> new BusinessException("There is no course with id %s".formatted(form.courseId())));
 			
 		    //Convert Schedule List to JSON String	
-			var schedules = objectMapper.writeValueAsString(form.shedules());
-			
+			var schedules = objectMapper.writeValueAsString(form.schedules());
 			
 			//Create Class Entity
 		    var entity  = form.entity();
 		    entity.setCourse(course);
-		    entity.setShedules(schedules);
-
+		    entity.setSchedules(schedules);
+		    
 		    entity = classesRepo.save(entity);
 		    
 		    return new ModificationResult<Integer>(entity.getId());
@@ -117,18 +119,22 @@ public class ClassService {
 	@Transactional
 	public ModificationResult<Integer> update(int id, ClassForm form) {
 		try {
-			var entity = classesRepo.findById(id).orElseThrow();
+			var entity = classesRepo.findById(id)
+								.orElseThrow(() -> new BusinessException("There is no class with id %s".formatted(id)));
 			
 			//Find Course
-			var course =  courseRepo.findById(form.courseId()).orElseThrow();
+			var course =  courseRepo.findById(form.courseId())
+								.orElseThrow(() -> new BusinessException("There is no course with id %s".formatted(form.courseId())));
+			
 			entity.setCourse(course);
 			
 			//Convert Schedule List to JSON string
-			var schedules = objectMapper.writeValueAsString(form.shedules());
-			entity.setShedules(schedules);
+			var schedules = objectMapper.writeValueAsString(form.schedules());
+			entity.setSchedules(schedules);
 			
-			entity.setStartDate(form.starDate());
+			entity.setStartDate(form.startDate());
 			entity.setType(form.classType());
+			entity.setMonths(form.months());
 			entity.setRemark(form.remark());
 			
 			entity.setUpdatedAt(LocalDateTime.now());

@@ -17,6 +17,7 @@ public record CourseForm(
 	String description) {
 
 	public Course entity() {
+		
 		var entity = new Course();
 		entity.setName(name);
 		entity.setLevel(level);
