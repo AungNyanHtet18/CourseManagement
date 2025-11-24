@@ -44,7 +44,7 @@ export type ClassListItem = {
      createdAt: string
 }
 
-export class RestClient{
+export class RestClientException{
      constructor(readonly message:string[]) {
         
      }
