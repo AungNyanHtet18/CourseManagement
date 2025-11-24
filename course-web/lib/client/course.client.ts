@@ -16,7 +16,7 @@ export async function findById(id: number | string): Promise<CourseDetails> {
       return await response.json()
 }
 
-export async function create(form: CourseForm): Promise<number> {
+export async function create(form: CourseForm): Promise<{id: number}> {
       const response = await request(`${ENDPOINT}`,{
           ...POST_CONFIG,
           body: JSON.stringify(form)
@@ -25,7 +25,7 @@ export async function create(form: CourseForm): Promise<number> {
       return await response.json()
 }
 
-export async function update(id: number | string, form: CourseForm): Promise<number> {
+export async function update(id: number | string, form: CourseForm): Promise<{id: number}> {
      const response = await request(`${ENDPOINT}/${id}`,{
            ...PUT_CONFIG,
            body: JSON.stringify(form)

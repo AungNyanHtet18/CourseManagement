@@ -32,6 +32,33 @@ export type CourseDetails = CourseListItem & {
                             updatedAt: string
 }
 
+
+export class RestClientException{
+     constructor(readonly message:string[]) {
+        
+     }
+}
+
+export const ScheduleSchema = z.object({
+     day: z.string().nonempty("Please select schedule day."),
+     start: z.string().nonempty("Please select schedule start time."),
+     end: z.string().nonempty("Please select schedule end time.")
+})
+
+export const ClassesSchema = z.object({
+      courseId: z.string().nonempty("Please select course."),
+      startDate: z.string().nonempty("Please enter start date."),
+      classType: z.string().nonempty("Please select class type."),
+      months: z.string().nonempty("Please enter schedule."),
+      remark: z.string().optional(),
+      schedules: z.array(z.object(ScheduleSchema)).nonempty("Please enter schedule.")
+
+})
+
+export type ClassForm = z.infer<typeof ClassesSchema>
+
+export type Schedule = z.infer<typeof ScheduleSchema>
+
 export type ClassListItem = {
      id: number
      courseId: number
@@ -44,9 +71,28 @@ export type ClassListItem = {
      createdAt: string
 }
 
-export class RestClientException{
-     constructor(readonly message:string[]) {
-        
-     }
+export type ClassDetails = ClassListItem & {
+      remark: string,
+      schedules: Schedule[],
+      updatedAt: string
 }
 
+export type ClassSearch = {
+      level?: string
+      type?: string
+      deleted?: boolean
+      keyword?: string
+}
+
+export type PageInfo = {
+      page: number
+      size: number
+      totalCount: number
+      totalPage: number
+      links: number[]
+}
+
+export type PageResult<T> = { 
+     list: T[],
+      pageInfo: PageInfo
+}
