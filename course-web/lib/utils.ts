@@ -15,3 +15,17 @@ export function queryString(form : {[key:string] : any}){
 
    return searchParam.toString()
 }
+
+export const POST_CONFIG:RequestInit = {
+   method: "POST",
+   headers: {
+     "Content-Type" : "application/json"
+   }
+} 
+
+export const PUT_CONFIG:RequestInit = {
+   method: "PUT",
+   headers: {
+     "Content-Type" : "application/json"
+   }
+} 

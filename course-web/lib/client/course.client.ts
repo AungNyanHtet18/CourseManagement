@@ -2,7 +2,7 @@
 
 import { request } from "../base-client";
 import { CourseDetails, CourseForm, CourseListItem, CourseSearch } from "../type";
-import { queryString } from "../utils";
+import { POST_CONFIG, PUT_CONFIG, queryString } from "../utils";
 
 const ENDPOINT = "courses"
 
@@ -18,23 +18,16 @@ export async function findById(id: number | string): Promise<CourseDetails> {
 
 export async function create(form: CourseForm): Promise<number> {
       const response = await request(`${ENDPOINT}`,{
-          headers: {
-               "Content-Type" : "application/json",
-          },
-          method: "POST",
+          ...POST_CONFIG,
           body: JSON.stringify(form)
           })
 
       return await response.json()
- 
 }
 
 export async function update(id: number | string, form: CourseForm): Promise<number> {
      const response = await request(`${ENDPOINT}/${id}`,{
-           headers: {
-                "Content-Type" : "application/json",
-           },
-           method: "PUT",
+           ...PUT_CONFIG,
            body: JSON.stringify(form)
      })
      
