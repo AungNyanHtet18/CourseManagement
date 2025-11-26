@@ -13,7 +13,7 @@ public record CourseListItem(
 	int id,
 	String name,
 	CourseLevel  Level,
-	String descirption,
+	String description,
 	boolean deleted,
 	LocalDateTime createAt) {
 

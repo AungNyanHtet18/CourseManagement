@@ -20,8 +20,8 @@ export type CourseSearch  = {
 export type CourseListItem = {
      id: number
      name: string
-     level: string
-     description: string
+     Level: string
+     descirption: string
      deleted: boolean
      createdAt: string
 }
@@ -33,11 +33,6 @@ export type CourseDetails = CourseListItem & {
 }
 
 
-export class RestClientException{
-     constructor(readonly message:string[]) {
-        
-     }
-}
 
 export const ScheduleSchema = z.object({
      day: z.string().nonempty("Please select schedule day."),
@@ -100,4 +95,10 @@ export type PageResult<T> = {
 export type OptionItem = {
       key: string
       value: string
+}
+
+
+export type ClientError = {
+      type: string
+      message: string[]
 }

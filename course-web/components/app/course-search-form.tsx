@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 import { Form } from "../ui/form"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useEffect } from "react"
-import { queryString } from "@/lib/utils"
+import { LEVELS_OPTIONS, queryString, STATUS_OPTIONS } from "@/lib/utils"
 import FormsSelect from "../forms/form-select"
 import FormsInput from "../forms/forms-input"
 import { Button } from "../ui/button"
@@ -21,6 +21,7 @@ export default function CourseSearchForm() {
          keyword: ""
         }
     })
+    
     const searchParam = useSearchParams()
     const router = useRouter() 
 
@@ -54,18 +55,15 @@ export default function CourseSearchForm() {
         <Form {...form}>
             <form onSubmit={form.handleSubmit(search)} className="flex gap-4 items-end">
                <FormsSelect control={form.control} path="deleted" label="Status" 
-                    options={[{key: "-1", value: "Select All"},
-                              {key: "false", value: "Active"},
-                              {key: "true", value: "Deleted"},
-                    ]} className="w-[180px]"/>
+                    options={[{key: "-1", value: "Select All"}, 
+                              ...STATUS_OPTIONS]} 
+                    className="w-[180px]"/>
 
                 <FormsSelect control={form.control} path="level" label="Level" 
-                    options={[{key: "-1", value: "Select All"},
-                              {key: "Basic", value: "Basic"},
-                              {key: "Intermediate", value: "Intermediate"},
-                              {key: "Advance", value: "Advance"},
-                              {key: "AllInOne", value: "ALL In One"},
-                    ]} className="w-[180px]"/>
+                    options={[
+                          {key: "-1", value: "Select All"},
+                           ...LEVELS_OPTIONS]} 
+                    className="w-[180px]"/>
                 
                 <FormsInput control={form.control} path="keyword" label="Keyword" placeholder="Search Keyword"/>
 

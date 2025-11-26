@@ -1,8 +1,10 @@
 import CourseSearchForm from "@/components/app/course-search-form";
 import PageTitle from "@/components/app/page-title";
-
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import * as courseClient from "@/lib/client/course.client"
 import { CourseListItem } from "@/lib/type";
+import { ArrowRight, Check, X } from "lucide-react";
+import Link from "next/link";
 
 
 export default async function CourseManagement(props : PageProps<'/courses'>) {
@@ -26,6 +28,35 @@ export default async function CourseManagement(props : PageProps<'/courses'>) {
 function SearchResult({list} : {list : CourseListItem[]}) {
      
     return (
-        <></>
+        <Table>
+            <TableHeader>
+                <TableRow>
+                    <TableHead>ID</TableHead>
+                    <TableHead>Name</TableHead>
+                    <TableHead>Level</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead>Created At</TableHead>
+                    <TableHead></TableHead>
+                </TableRow>
+            </TableHeader>
+
+            <TableBody>
+                {list.map((item, index) => 
+                    <TableRow key={index}>
+                        <TableCell>{item.id}</TableCell>
+                        <TableCell>{item.name}</TableCell>
+                        <TableCell>{item.Level}</TableCell>
+                        <TableCell>{item.descirption}</TableCell>
+                        <TableCell>{item.deleted ? <X className="size-4"/> : <Check className="size-4"/> }</TableCell>
+                        <TableCell>{item.createdAt}</TableCell>
+                         <TableCell>
+                            <Link href={`courses/${item.id}`} >
+                              <ArrowRight  className="size-4"/>
+                            </Link>
+                         </TableCell>
+                    </TableRow>
+                )}
+            </TableBody>
+        </Table>
     )
 }
