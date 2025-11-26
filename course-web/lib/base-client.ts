@@ -13,4 +13,3 @@ export async function request(path: string, init: RequestInit = {}) {
 
      return response
 }
-

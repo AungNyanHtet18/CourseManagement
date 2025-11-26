@@ -13,7 +13,7 @@ export type CourseForm = z.infer<typeof CourseSchema>
 
 export type CourseSearch  = {
      level?: string
-     deleted?: boolean
+     deleted?: string
      keyword?: string
 }
 
@@ -52,8 +52,8 @@ export const ClassesSchema = z.object({
       months: z.string().nonempty("Please enter schedule."),
       remark: z.string().optional(),
       schedules: z.array(z.object(ScheduleSchema)).nonempty("Please enter schedule.")
-
 })
+
 
 export type ClassForm = z.infer<typeof ClassesSchema>
 
@@ -80,7 +80,7 @@ export type ClassDetails = ClassListItem & {
 export type ClassSearch = {
       level?: string
       type?: string
-      deleted?: boolean
+      deleted?: string
       keyword?: string
 }
 
@@ -95,4 +95,9 @@ export type PageInfo = {
 export type PageResult<T> = { 
      list: T[],
       pageInfo: PageInfo
+}
+
+export type OptionItem = {
+      key: string
+      value: string
 }

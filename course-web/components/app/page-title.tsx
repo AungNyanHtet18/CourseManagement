@@ -1,5 +1,4 @@
 import { IconType } from "@/lib/type";
-import { headers } from "next/headers";
 import IconComponent from "./icon-component";
 
 export default function PageTitle({icon, title} : {icon: IconType, title: string}){

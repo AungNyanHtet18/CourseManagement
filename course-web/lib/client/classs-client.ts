@@ -1,4 +1,4 @@
-'use-server'
+'use server'
 
 import { request } from "../base-client"
 import { ClassDetails, ClassForm, ClassListItem, ClassSearch, PageResult } from "../type"

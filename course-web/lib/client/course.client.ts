@@ -1,4 +1,4 @@
-'use-server'
+'use server'
 
 import { request } from "../base-client";
 import { CourseDetails, CourseForm, CourseListItem, CourseSearch } from "../type";
@@ -6,7 +6,7 @@ import { POST_CONFIG, PUT_CONFIG, queryString } from "../utils";
 
 const ENDPOINT = "courses"
 
-export async function search(search: CourseSearch): Promise<CourseListItem> {
+export async function search(search: CourseSearch): Promise<CourseListItem[]> {
      const response = await request(`${ENDPOINT}?${queryString(search)}`)
      return await response.json()
 }
