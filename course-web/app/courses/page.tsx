@@ -34,6 +34,7 @@ function SearchResult({list} : {list : CourseListItem[]}) {
                     <TableHead>ID</TableHead>
                     <TableHead>Name</TableHead>
                     <TableHead>Level</TableHead>
+                    <TableHead>Description</TableHead>
                     <TableHead>Status</TableHead>
                     <TableHead>Created At</TableHead>
                     <TableHead></TableHead>
@@ -46,7 +47,7 @@ function SearchResult({list} : {list : CourseListItem[]}) {
                         <TableCell>{item.id}</TableCell>
                         <TableCell>{item.name}</TableCell>
                         <TableCell>{item.Level}</TableCell>
-                        <TableCell>{item.descirption}</TableCell>
+                        <TableCell>{item.description}</TableCell>
                         <TableCell>{item.deleted ? <X className="size-4"/> : <Check className="size-4"/> }</TableCell>
                         <TableCell>{item.createdAt}</TableCell>
                          <TableCell>

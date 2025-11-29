@@ -1,6 +1,6 @@
 'use client'
 
-import { ClientError, CourseForm, CourseSchema } from "@/lib/type"
+import { CourseForm, CourseSchema } from "@/lib/type"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter, useSearchParams } from "next/navigation" //client router
 import { useEffect } from "react"
@@ -10,10 +10,12 @@ import { LEVELS_OPTIONS } from "@/lib/utils"
 import FormsSelect from "@/components/forms/form-select"
 import { Form } from "@/components/ui/form"
 import PageTitle from "@/components/app/page-title"
-import { FormInput, Save } from "lucide-react"
+import { Save } from "lucide-react"
 import FormsInput from "@/components/forms/forms-input"
 import FormsTextAreaInput from "@/components/forms/form-textarea"
 import { Button } from "@/components/ui/button"
+import { toast } from "sonner"
+import { handle } from "@/lib/client-utils"
 
 export default function CourseEditPage() {
 
@@ -50,40 +52,28 @@ export default function CourseEditPage() {
     
 
     async function save(form: CourseForm) { 
-       try{
+       handle(async()=> {
          const result = await ( id ? courseClient.update(id, form) : courseClient.create(form))
          router.push(`/courses/${result.id}`)
-       }catch(e: any) {
-          let messages:string[] = [e.message || "Unknown Error"]
-
-          if(e.message) {
-             const error = JSON.parse(e.message)
-             if(error?.type == "Client Error") {
-                const clientError = error as ClientError
-                messages = clientError.message
-
-             }
-          }
-       }
+       })
+       
    }
    
-
-     return (
+   return (
        <section className="space-y-4">
          <PageTitle icon="Pencil" title={id ? "Edit Course" : "Add New Course"} />
 
          <Form {...form}>
             <form onSubmit={form.handleSubmit(save)}>
-               <div className="grid grid-cols-4 gap-4 items-start">
+               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-start">
                   <FormsSelect control={form.control} path="level" 
                      label="Course Level" options={LEVELS_OPTIONS}/>
 
-                   <FormsInput control={form.control} path="name" label="Course Name" className="col-span-2"/>
+                   <FormsInput control={form.control} path="name" label="Course Name" className="col-span-full md:col-span-2"/>
                    
-                    <div></div>
-                   <FormsTextAreaInput control={form.control} path="description" label="Description" className="col-span-4"/>
+                   <FormsTextAreaInput control={form.control} path="description" label="Description" className="col-span-3"/>
                    
-                   <div>
+                   <div className="col-span-full">
                      <Button type="submit">
                         <Save/> Save
                      </Button>
@@ -91,8 +81,6 @@ export default function CourseEditPage() {
                </div>
             </form>
          </Form>
-
        </section>
-
      )
 }

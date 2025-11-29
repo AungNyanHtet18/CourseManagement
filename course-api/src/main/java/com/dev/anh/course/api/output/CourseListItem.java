@@ -15,7 +15,7 @@ public record CourseListItem(
 	CourseLevel  Level,
 	String description,
 	boolean deleted,
-	LocalDateTime createAt) {
+	LocalDateTime createdAt) {
 
 	public static void select(CriteriaQuery<CourseListItem> cq, Root<Course> root) {
 		cq.multiselect(

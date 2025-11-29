@@ -21,11 +21,10 @@ export type CourseListItem = {
      id: number
      name: string
      Level: string
-     descirption: string
+     description: string
      deleted: boolean
      createdAt: string
 }
-
 
 export type CourseDetails = CourseListItem & {
                             classes: ClassListItem[]
@@ -100,5 +99,5 @@ export type OptionItem = {
 
 export type ClientError = {
       type: string
-      message: string[]
+      messages: string[]
 }

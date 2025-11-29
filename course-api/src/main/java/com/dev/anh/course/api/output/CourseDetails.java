@@ -13,7 +13,7 @@ public record CourseDetails(
 		String descirption,
 		List<ClassListItem> classes, 
 		boolean deleted,
-		LocalDateTime createAt,
+		LocalDateTime createdAt,
 		LocalDateTime updatedAt) {
 
 	public static CourseDetails from(Course entity) {
