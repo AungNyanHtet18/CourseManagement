@@ -56,7 +56,7 @@ export type Schedule = z.infer<typeof ScheduleSchema>
 export type ClassListItem = {
      id: number
      courseId: number
-     level: string
+     Level: string
      courseName: string
      startDate: string
      classType: string
@@ -76,6 +76,7 @@ export type ClassSearch = {
       type?: string
       deleted?: string
       keyword?: string
+      page: number
 }
 
 export type PageInfo = {
@@ -87,7 +88,7 @@ export type PageInfo = {
 }
 
 export type PageResult<T> = { 
-     list: T[],
+      list: T[],
       pageInfo: PageInfo
 }
 

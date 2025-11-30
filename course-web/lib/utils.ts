@@ -40,3 +40,10 @@ export const STATUS_OPTIONS: OptionItem[] = [
     {key: "false", value: "Active"},
     {key: "true", value: "Deleted"}
 ]
+
+export const TYPE_OPTION: OptionItem[] = [
+   {key: "Zoom", value: "Z"},
+   {key: "", value: ""},
+   {key: "", value: ""},
+   {key: "", value: ""},
+]

@@ -14,7 +14,6 @@ import { Save } from "lucide-react"
 import FormsInput from "@/components/forms/forms-input"
 import FormsTextAreaInput from "@/components/forms/form-textarea"
 import { Button } from "@/components/ui/button"
-import { toast } from "sonner"
 import { handle } from "@/lib/client-utils"
 
 export default function CourseEditPage() {
@@ -41,7 +40,7 @@ export default function CourseEditPage() {
              form.reset({
                 level: result.Level,
                 name: result.name,
-                description: result.descirption
+                description: result.description
              })
           }
       }

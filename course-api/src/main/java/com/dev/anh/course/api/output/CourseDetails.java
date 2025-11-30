@@ -10,7 +10,7 @@ public record CourseDetails(
 		int id,
 		String name,
 		CourseLevel  Level,
-		String descirption,
+		String description,
 		List<ClassListItem> classes, 
 		boolean deleted,
 		LocalDateTime createdAt,
