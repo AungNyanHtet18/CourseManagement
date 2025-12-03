@@ -10,7 +10,11 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import Loading from "@/components/app/app-loading";
 import DeleteStatus from "@/components/app/status-component";
 import FormsSelect from "@/components/forms/form-select";
-import { LEVELS_OPTIONS, STATUS_OPTIONS } from "@/lib/utils";
+import { LEVELS_OPTIONS, STATUS_OPTIONS, TYPE_OPTION } from "@/lib/utils";
+import FormsInput from "@/components/forms/forms-input";
+import { Button } from "@/components/ui/button";
+import {ArrowRight, Plus, Search } from "lucide-react";
+import Link from "next/link";
 
 export default function ClassManagement() {
 
@@ -23,7 +27,7 @@ export default function ClassManagement() {
 
 
      async function search(form: ClassSearch) {
-         if(form.level == "-1") {
+         if(form.Level == "-1") {
              delete form.deleted
          }
 
@@ -39,7 +43,6 @@ export default function ClassManagement() {
         setPage(result)
      }
 
-
      return (
         <section className="space-y-4">
             <PageTitle icon="CalendarCheck" title="Class Management"/>
@@ -53,7 +56,7 @@ function SearchForm({onSearch} : {onSearch: (form: ClassSearch)=> void}) {
 
    const form = useForm<ClassSearch>({
        defaultValues: {
-          level: "-1",
+          Level: "-1",
           type: "-1",
           deleted: "-1",
           keyword: "",
@@ -63,16 +66,34 @@ function SearchForm({onSearch} : {onSearch: (form: ClassSearch)=> void}) {
 
    return(
       <Form {...form} >
-         <form onSubmit={form.handleSubmit(onSearch)}>
+         <form onSubmit={form.handleSubmit(onSearch)} className="flex gap-4 items-end">
             <FormsSelect control={form.control} path="type" 
-               options={[]} label="Class Type" />
+               options={[{key: "-1",value: "Select All"}, ...TYPE_OPTION]} 
+               label="Class Type" className="w-[180px]" />
 
-            <FormsSelect control={form.control} path="level" 
+            <FormsSelect control={form.control} path="Level"
                options={[{key: "-1", value: "Select All"}, ...LEVELS_OPTIONS]} 
-               label="Level" />
+               label="Level" className="w-[180px]" />
 
-            <FormsSelect control={form.control} path="deleted" 
-               options={[{key: "-1", value: "Select All" }   ,...STATUS_OPTIONS]} label="Status"/>
+            <FormsSelect control={form.control} path="deleted"  
+               options={[{key: "-1", value: "Select All" }   ,...STATUS_OPTIONS]} 
+               label="Status" className="w-[180px]"/>
+            
+            <FormsInput control={form.control} path="keyword" 
+               label="Keyword" placeholder="Search Keyword" className="w-[250px]" />
+         
+           <div className="space-x-2">
+              <Button type="submit">
+                  <Search/> Search
+              </Button>
+
+              <Button type="button" asChild>
+                 <Link href={"/classes/edit"}>
+                    <Plus/> Add New
+                 </Link>
+              </Button>
+           </div>
+
          </form>
       </Form>
    )
@@ -117,7 +138,11 @@ function SearchResult({page} : {page: PageResult<ClassListItem> | undefined}) {
                      <DeleteStatus deleted={item.deleted} />
                   </TableCell>
                   <TableCell>{item.createdAt}</TableCell>
-                  <TableCell></TableCell>                  
+                  <TableCell>
+                     <Link href={`/classes/${item.id}`}>
+                         <ArrowRight className="size-4"/> 
+                     </Link>   
+                  </TableCell>                  
               </TableRow>
             )}
           </TableBody>

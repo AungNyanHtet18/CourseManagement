@@ -22,7 +22,7 @@ export default function RootLayout({
             {children}  
         </main>
 
-        <Toaster position="top-right" duration={1 * 4000} /> {/*duration means how many second  error will be shown on screen */}
+        <Toaster position="bottom-right" duration={1 * 4000} /> {/*duration means how many second  error will be shown on screen */}
       </body>
     </html>
   );

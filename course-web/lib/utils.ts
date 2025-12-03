@@ -42,8 +42,18 @@ export const STATUS_OPTIONS: OptionItem[] = [
 ]
 
 export const TYPE_OPTION: OptionItem[] = [
-   {key: "Zoom", value: "Z"},
-   {key: "", value: ""},
-   {key: "", value: ""},
-   {key: "", value: ""},
+   {key: "Zoom", value: "Zoom"},
+   {key: "Recorded", value: "Recorded"},
+   {key: "Weekend", value: "Weekend"},
+   {key: "Weekday", value: "Weekday"},
+]
+
+export const DAYS_OF_WEEK:OptionItem[] = [
+    {key: "MONDAY",value: "Monday"},
+    {key: "TUESDAY",value: "Tuesday"},
+    {key: "WEDNESDAY",value: "Wednesday"},
+    {key: "THURSDAY",value: "Thursday"},
+    {key: "FRIDAY",value: "Friday"},
+    {key: "SATURDAY",value: "Saturday"},
+    {key: "SUNDAY",value: "Sunday"}
 ]

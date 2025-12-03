@@ -13,7 +13,8 @@ export async function handle(func: ()=> Promise<void>) {
 
             if(error?.type == "Client Error") {
             const clientError = error as ClientError
-            messages = clientError.messages            
+            messages = clientError.messages  
+                  
             }
         }
         

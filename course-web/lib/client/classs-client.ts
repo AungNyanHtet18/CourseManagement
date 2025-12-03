@@ -13,7 +13,7 @@ export async function search(form: ClassSearch): Promise<PageResult<ClassListIte
 }
 
 export async function findById(id: number | string): Promise<ClassDetails> {
-    const response = await request(`${ENDPOINT}`)
+    const response = await request(`${ENDPOINT}/${id}`)
     return await response.json()
 }
 

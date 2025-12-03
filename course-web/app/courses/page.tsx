@@ -27,7 +27,7 @@ export default async function CourseManagement(props : PageProps<'/courses'>) {
 }
 
 function SearchResult({list} : {list : CourseListItem[]}) {
-     
+    
     return (
         <Table>
             <TableHeader>

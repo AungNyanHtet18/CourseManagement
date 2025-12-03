@@ -45,7 +45,7 @@ export const ClassesSchema = z.object({
       classType: z.string().nonempty("Please select class type."),
       months: z.string().nonempty("Please enter schedule."),
       remark: z.string().optional(),
-      schedules: z.array(z.object(ScheduleSchema)).nonempty("Please enter schedule.")
+      schedules: z.array(ScheduleSchema).nonempty("Please enter schedule.")
 })
 
 
@@ -72,7 +72,7 @@ export type ClassDetails = ClassListItem & {
 }
 
 export type ClassSearch = {
-      level?: string
+      Level?: string
       type?: string
       deleted?: string
       keyword?: string

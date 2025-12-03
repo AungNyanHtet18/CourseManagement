@@ -5,7 +5,17 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { Pencil } from "lucide-react";
 
-export default function PageTitle({icon, title, subTitle, description, editUrl} : {icon: IconType, title: string, subTitle?: string[], description?: string, editUrl?: string}){
+export default function PageTitle({icon, 
+                                   title, 
+                                   subTitle, 
+                                   description, 
+                                   editUrl} : 
+
+                                   {icon: IconType, 
+                                    title: string, 
+                                    subTitle?: string[], 
+                                    description?: string, 
+                                    editUrl?: string}){
     
     if(subTitle) {
          return (
@@ -15,11 +25,14 @@ export default function PageTitle({icon, title, subTitle, description, editUrl} 
                 </div>
                 <div>
                     <div className="text-xl">{title}</div>
-                    <div className="flex gap-2">
-                        {subTitle.map((item, index) => 
-                            <Badge key={index}>{item}</Badge>)}
-                    </div>
-                    { description &&  <div className="text-muted-foreground">{description}</div>}
+                    {subTitle.length > 0 && 
+                        <div className="flex gap-2">
+                            {subTitle.map((item, index) => 
+                                <Badge key={index}>{item}</Badge>)}
+                        </div>
+                    }
+
+                     {description && <div className="text-muted-foreground">{description}</div>}
                 </div>
 
                 {editUrl &&
@@ -30,7 +43,7 @@ export default function PageTitle({icon, title, subTitle, description, editUrl} 
                         </Link>
                     </Button>
                   </div>
-                }
+                }     
             </header>
          )
     }
@@ -39,11 +52,23 @@ export default function PageTitle({icon, title, subTitle, description, editUrl} 
     return (
         <header className="flex items-center gap-2">
             <div>
-            <IconComponent icon={icon} className="size-7" />
+                <IconComponent icon={icon} className="size-7" />
             </div>
             <div>
                 <div className="text-xl">{title}</div>
+                 {description && <div className="text-muted-foreground text-1xl ">{description}</div>}
+               
             </div>
+
+            {editUrl &&
+                <div className="ml-auto">
+                    <Button asChild>
+                        <Link href={editUrl}>
+                            <Pencil/> Edit
+                        </Link>
+                    </Button>
+                </div>
+            }    
         </header>
      )
 }
