@@ -1,6 +1,5 @@
 import "server-only"
 
-
 export async function request(path: string, init: RequestInit = {}) {
      const endpoint = `${process.env.REST_API}/${path}`
 

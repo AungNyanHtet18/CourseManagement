@@ -18,7 +18,7 @@ public record ClassDetails(
 		ClassType classType,
 		int months,
 		String remark,
-		List<Schedule> shedules,
+		List<Schedule> schedules,
 		boolean deleted,
 		LocalDateTime createdAt,
 		LocalDateTime updatedAt) {

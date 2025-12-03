@@ -15,8 +15,7 @@ import { Plus, Save, Trash } from "lucide-react"
 
 import * as courseClient from '@/lib/client/course.client'
 import * as classClient from '@/lib/client/classs-client'
-import { useRouter } from "next/navigation"
-
+import { useRouter, useSearchParams } from "next/navigation"
 
 export default function ClassEditPage() {
 
@@ -51,9 +50,33 @@ export default function ClassEditPage() {
 
     }, [setCourses])
 
+    const params = useSearchParams()
+    const id = params.get("id")
+
+    useEffect(() => {
+    
+        async function load() {
+             if(id) {
+                 const details = await classClient.findById(id)
+                 form.setValue("courseId", String(details.courseId))
+                 form.setValue("classType", details.classType)
+                 form.setValue("months",  String(details.months))
+                 form.setValue("startDate", details.startDate)
+                 form.setValue("remark", details.remark)
+
+                 remove(0)  // removing firstly scheule inputs box before inserting schedules for edit
+                
+                 form.setValue('schedules',details.schedules)
+             }
+        }
+
+        load()
+
+    }, [id, form])
+
 
     async function save(form: ClassForm) {
-        const result = await classClient.create(form)
+        const result =  id ? await classClient.update(id, form)  :  await classClient.create(form)
         router.push(`/classes/${result.id}`)
     }
 
@@ -75,7 +98,7 @@ export default function ClassEditPage() {
 
     return (
         <section className="space-y-4">
-            <PageTitle icon="Pencil" title="Create Course" />
+            <PageTitle icon="Pencil" title={`${id ? 'Edit': 'Create'} Course`} />
 
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(save)} className="grid grid-cols-4 gap-4">
